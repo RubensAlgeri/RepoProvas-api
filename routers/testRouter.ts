@@ -8,5 +8,6 @@ import { validateToken } from "../middlewares/tokenMiddleware.js";
 const testRouter = Router();
 testRouter.post('/test',validateToken, schemaValidator(schema.testSchema), controller.postTest)
 testRouter.get('/test/teacher', validateToken, controller.getTestsByTeacher)
+testRouter.get('/test/discipline', validateToken, controller.getTestsByDiscipline)
 
 export default testRouter;

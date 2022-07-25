@@ -47,3 +47,29 @@ export function findTestByTeacher() {
             },
     })
 }
+
+export function findTestByDiscipline() {
+
+    return prisma.term.findMany({
+        select:{
+            id:true,
+            number:true,
+            disciplines:{
+                select:{
+                    name:true,
+                    teacherDisciplines:{
+                        select:{
+                            teacher:{
+                            },
+                            tests:{
+                                include:{
+                                    category:{}
+                                }
+                            }
+                        }
+                    }
+                },
+            }
+        }
+    })
+}
