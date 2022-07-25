@@ -45,4 +45,14 @@ describe("POST /signup", () => {
         const response = await supertest(app).post("/test").send(testData).set({ 'authorization': `Bearer ${tokenReceived.text}`});
         expect(response.status).toEqual(201);
     });
+
+    it("get all tests grouped by teacher it should return a object", async () => {
+        const body = await factory.generateUser();
+        await supertest(app).post("/sign-up").send(body);
+        delete body.confirmedPassword;
+        const tokenReceived = await supertest(app).post("/sign-in").send(body);
+
+        const response = await supertest(app).get("/test/teacher").set({ 'authorization': `Bearer ${tokenReceived.text}`});
+        expect(response.text).not.toBeNull();
+    });
 });
