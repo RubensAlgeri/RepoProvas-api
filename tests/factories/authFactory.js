@@ -10,3 +10,13 @@ export async function generateUser(){
     }
     return user;
 }
+
+export async function generateTest(){
+    const name = faker.random.words();
+    const pdfUrl = faker.internet.url();
+    const test = {
+        name,
+        pdfUrl,
+    }
+    return test;
+}
