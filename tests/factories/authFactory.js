@@ -1,4 +1,6 @@
+import app from '../../app.js';
 import { faker } from "@faker-js/faker";
+import supertest from 'supertest';
 
 export async function generateUser(){
     const password = faker.internet.password(6);
@@ -11,12 +13,16 @@ export async function generateUser(){
     return user;
 }
 
-export async function generateTest(){
-    const name = faker.random.words();
-    const pdfUrl = faker.internet.url();
-    const test = {
-        name,
-        pdfUrl,
+export async function singInUser(){
+    const password = faker.internet.password(6);
+    const body ={
+        email:faker.internet.email(),
+        password,
+        confirmedPassword:password
     }
-    return test;
+    await supertest(app).post("/sign-up").send(body);
+    delete body.confirmedPassword;
+    const response = await supertest(app).post("/sign-in").send(body);
+    
+    return response.text;
 }
