@@ -11,7 +11,7 @@
     "build": "./node_modules/typescript/bin/tsc",
     "start": "node dist/server.js",
     "dev": "nodemon server.ts",
-    "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -i"
+    "test": "dotenv -e .env.test prisma migrate dev && NODE_OPTIONS=--experimental-vm-modules dotenv -e .env.test jest -- -i"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
