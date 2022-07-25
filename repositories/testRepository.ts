@@ -24,3 +24,26 @@ export function insertTest(data:CreateTestData) {
 export function checkToken(id:number) {
     return prisma.user.findUnique({where:{id}})
 }
+
+export function findTestByTeacher() {
+    
+    return prisma.teacher.findMany({
+                select:{
+                    name:true,
+                    teacherDisciplines:{
+                        select:{
+                            discipline:{
+                                select:{
+                                    term:{}
+                                }
+                            },
+                            tests:{
+                                include:{
+                                    category:{},
+                                }
+                            }
+                        }
+                    }
+            },
+    })
+}

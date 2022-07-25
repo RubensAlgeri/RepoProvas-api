@@ -28,3 +28,8 @@ export async function insertTest(data) {
 
     await testRepository.insertTest(data)
 }
+
+export async function findTestByTeacher() {
+    const testsByTeacher = await testRepository.findTestByTeacher()
+    return testsByTeacher;
+}
